@@ -1,2 +1,8 @@
+urllib
+pyyaml
+pytube
+requests
+pypresence
 youtube_dl
 youtube-search
+youtubesearchpython
