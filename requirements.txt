@@ -2,6 +2,7 @@ urllib
 pyyaml
 pytube
 requests
+keyboard
 pypresence
 youtube_dl
 youtube-search

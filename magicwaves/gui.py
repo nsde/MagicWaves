@@ -4,6 +4,7 @@ import os
 import yaml
 import time
 import tkinter
+import keyboard
 import urllib.request
 
 from PIL import Image, ImageTk
@@ -25,7 +26,7 @@ def gettheme():
 win = tkinter.Tk()
 win.title('MagicWaves')
 win.config(bg=gettheme()['bg'])
-win.geometry('480x500')
+win.geometry('550x685')
 win.iconphoto(False, tkinter.PhotoImage(file='media/win.png'))
 
 top_frame = tkinter.Frame(win,
@@ -103,7 +104,7 @@ def search(rec_frame, title_label):
         load = Image.open(f'temp/thumbnails/{video["id"]}.jpg').resize((180, 101), Image.ANTIALIAS)
         render = ImageTk.PhotoImage(load)
 
-        image_label = tkinter.Buttom(video_frame,
+        image_label = tkinter.Button(video_frame,
             image=render)
         image_label.pack(side='left', anchor='w')
 
@@ -153,5 +154,7 @@ tkinter.Button(top_frame,
 
 rpc = magicwaves.start_rpc()
 rpc.update(state='Listening to music', details='In main menu', start=time.time(), large_image='icon')
+
+keyboard.add_hotkey('enter', lambda: search(recommendation_frame, title))
 
 win.mainloop()
