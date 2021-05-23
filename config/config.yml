@@ -1,2 +1,6 @@
+# THE CONFIG IS CURRENTLY UNUSED!
+
+# ===============================
+
 performance:
   video_thumbnails: True # turn off (False) for better performance

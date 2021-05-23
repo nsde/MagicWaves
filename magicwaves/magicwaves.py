@@ -1,6 +1,7 @@
 import os
 import shutil
 import requests
+import threading
 import webbrowser
 import youtube_dl
 import pypresence
@@ -12,19 +13,35 @@ cwd = os.getcwd()
 def start_rpc():
     rpc = pypresence.Presence(840292943738699777)
     rpc.connect()
+
     return rpc
 
-def play_video(video_id, video_name):
-    videoUrl = 'https://youtu.be/' + video_id
+def download(url):
+    name = url.split('=')[1]
+    path = f'{cwd}\\temp\\audio\\{name}.wav'
+
     ydl_opts = {
-        'outtmpl': f'{cwd}\\temp\\audio\\{video_id}.wav',
+        'outtmpl': path,
         }
-    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        ydl.download([videoUrl])
+
+    with youtube_dl.YoutubeDL(ydl_opts) as downloader:
+        downloader.download([url])
+    
+    return path
+    
+def play(path):
+    """Plays a song"""
+    os.system(f'start {path}')
+
+def show(path):
+    """Shows a directory/file in the file explorer"""
+    if '.' in path.replace('\\', '/').split('/')[-1]:
+        # Is a file
+        path = path.replace('\\', '/').split('/')[:-1] # use the directory, not file
+    os.system(f'explorer.exe {path}')
 
 def search(query):
-    print(f'Searching \'{query}\'...')
-    results = ysp.VideosSearch(query, limit=12).result()['result']
+    results = ysp.VideosSearch(query, limit=5).result()['result']
 
     return results
 
