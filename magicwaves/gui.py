@@ -19,10 +19,21 @@ cwd = os.getcwd()
 
 def cleartemp():
     try:
-        shutil.rmtree(cwd + '\\temp\\')
-        os.mkdir
+        shutil.rmtree(cwd + '/temp/')
     except:
         pass
+
+    try:
+        print(1)
+        # WHY IS THIS NOT WORKING os.mkdir(os.getcwd() + '/temp')
+        tempdir = cwd.replace('\\', '/')
+        command = f'mkdir {tempdir}/temp'
+        print(command)
+        os.system(command)
+        print(2)
+    except Exception as e:
+        print(3)
+        print(e)
 
 cleartemp()
 

@@ -1,4 +1,3 @@
-import youtubesearchpython as ysp
+import os
 
-results = ysp.VideosSearch('hello', limit=5).result()['result']
-print(results[0]['duration'])
+os.system('MKDIR Q:/Coding/Projects/NSDE/magicwaves/temp')
